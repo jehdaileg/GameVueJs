@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/foundation.min.css">
+	<title>Game in Vue Js </title>
+
+</head>
+<body>
+
+	<nav class="navbar bg-dark text-white">
+		<a href="" class="navbar-brand">Practic VueJs1</a>
+	</nav>
+
+
+	<div id="app">
+
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width :playerHealth+ '%'}">
+                	{{ playerHealth }}
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: monsterHealth+ '%'}">
+                	{{ monsterHealth }}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row controls" v-if="!gameIsRunning">
+        <div class="small-12 columns">
+            <button id="start-game" v-on:click="startGame">START NEW GAME</button>
+        </div>
+    </section>
+    <section class="row controls" v-else>
+        <div class="small-12 columns">
+            <button id="attack" v-on:click="attack">ATTACK</button>
+            <button id="special-attack" v-on:click="specialAttack">SPECIAL ATTACK</button>
+            <button id="heal" v-on:click="heal">HEAL</button>
+            <button id="give-up" v-on:click="giveUp">GIVE UP</button>
+        </div>
+    </section>
+    <section class="row log" v-if="turns.length > 0 ">
+        <div class="small-12 columns">
+            <ul>
+                <li v-for="turn in turns" :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+
+                	{{ turn.text }}
+
+                </li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<footer class="text-info fixed-bottom text-muted">
+
+	<p class="text-info">&hearts; JEHDAI developper &copy; 2021</p>
+	
+</footer>
+
+	<script src="js/vue.js"></script>
+	<script src="js/app.js"></script>
+	
+</body>
+</html>
